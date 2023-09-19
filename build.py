@@ -1,10 +1,11 @@
 import pandas as pd
-import matplotlib.pyplot as plt
+from src.functions import get_nof_squirrels_bycolors
 
 
-def function():
+def plot():
     df = pd.read_csv('data/dataset.csv', delimiter=';', encoding='ISO-8859-1')
+    get_nof_squirrels_bycolors(df)
 
 
 if __name__ == "__main__":
-    function()
+    plot()
