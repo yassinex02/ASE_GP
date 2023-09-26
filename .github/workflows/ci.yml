@@ -34,10 +34,16 @@ jobs:
       run: |
         echo "Tests failed. Exiting workflow."
         exit 1
-      
+
+    - name: List directory contents
+      run: ls -al
+
     - name: Run build.py
       run: python build.py
-        
+      
+    - name: List directory contents
+      run: ls -al
+    
     - name: Check for new files # check if 2 new files were created after running build.py  
       run: |
         NEW_FILES_COUNT=$(git status --porcelain | grep "^??" | wc -l)
