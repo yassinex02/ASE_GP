@@ -15,6 +15,11 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v2
       
+    - name: Remove map.html and squirrel_colors.png if they exist
+      run: |
+        rm -f map.html
+        rm -f squirrel_colors.png
+        
     - name: Set up Python
       uses: actions/setup-python@v2
       with:
@@ -34,11 +39,10 @@ jobs:
     - name: List directory contents
       run: ls -al
     
-    - name: Check for new files # check if 2 new files were created after running build.py  
+    - name: Check for the presence of map.html and squirrel_colors.png
       run: |
-        NEW_FILES_COUNT=$(git status --porcelain | grep "^??" | wc -l)
-        if [ "$NEW_FILES_COUNT" -ne 2 ]; then
-          echo "Expected 2 new files but found $NEW_FILES_COUNT"
+        if [[ ! -f "map.html" ]] || [[ ! -f "squirrel_colors.png" ]]; then
+          echo "Either map.html or squirrel_colors.png is missing."
           exit 1
         fi
 
@@ -51,4 +55,3 @@ jobs:
       run: |
         echo "Tests failed. Exiting workflow."
         exit 1
-
