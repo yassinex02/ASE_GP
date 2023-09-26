@@ -13,6 +13,8 @@ def get_nof_squirrels_bycolors(df):
     plt.xticks(rotation=45)  # Rotate x-axis labels for better readability
     plt.tight_layout()
 
+    # save plot to file
+    plt.savefig('squirrel_colors.png')
     # Show the plot
     plt.show()
 
