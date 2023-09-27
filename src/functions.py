@@ -1,6 +1,7 @@
 import matplotlib.pyplot as plt
 import folium
 import webbrowser
+import mpld3
 
 
 def get_nof_squirrels_bycolors(df):
@@ -8,15 +9,13 @@ def get_nof_squirrels_bycolors(df):
     plt.figure(figsize=(10, 6))
     fur_color_counts.plot(kind='bar', color='skyblue')
     plt.title('Number of Squirrels Per Fur Color')
-    # plt.xlabel('Fur Color')
+    plt.xlabel('Fur Color')
     plt.ylabel('Number of Squirrels')
     plt.xticks(rotation=45)  # Rotate x-axis labels for better readability
     plt.tight_layout()
-
-    # save plot to file
-    plt.savefig('squirrel_colors.png')
-    # Show the plot
-    plt.show()
+    html_plot = mpld3.fig_to_html(plt.gcf())
+    with open('squirrel_plot.html', 'w') as file:
+        file.write(html_plot)
 
 
 # Map of White Squirrels: Create a map that marks the locations of white squirrels spotted during the census.
