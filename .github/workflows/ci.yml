@@ -1,0 +1,57 @@
+name: Python CI
+
+on:
+  push:
+    branches:
+      - main
+  # pull_request:
+  #   branches:
+  #     - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+      
+    - name: Remove map.html and squirrel_colors.png if they exist
+      run: |
+        rm -f map.html
+        rm -f squirrel_colors.png
+        
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.x'
+        
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt        
+
+    - name: List directory contents
+      run: ls -al
+
+    - name: Run build.py
+      run: python build.py
+
+    - name: List directory contents
+      run: ls -al
+    
+    - name: Check for the presence of map.html and squirrel_colors.png
+      run: |
+        if [[ ! -f "map.html" ]] || [[ ! -f "squirrel_colors.png" ]]; then
+          echo "Either map.html or squirrel_colors.png is missing."
+          exit 1
+        fi
+
+    - name: Run tests
+      id: tests
+      run: python src/test.py
+      
+    - name: Check test results
+      if: steps.tests.outcome == 'failure'
+      run: |
+        echo "Tests failed. Exiting workflow."
+        exit 1
