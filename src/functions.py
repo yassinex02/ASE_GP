@@ -9,13 +9,12 @@ def get_nof_squirrels_bycolors(df):
     plt.figure(figsize=(10, 6))
     fur_color_counts.plot(kind='bar', color='skyblue')
     # plt.title('Number of Squirrels Per Fur Color')
-    plt.title('AHAHAHAHAHHAHAHAHA')
+    plt.title('TTESTTTT')
     plt.xlabel('Fur Color')
     plt.ylabel('Number of Squirrels')
     plt.xticks(rotation=45)  # Rotate x-axis labels for better readability
     plt.tight_layout()
     html_plot = mpld3.fig_to_html(plt.gcf())
-    plt.show()
     with open('squirrel_plot.html', 'w') as file:
         file.write(html_plot)
 
