@@ -6,10 +6,10 @@ import mpld3
 
 def get_nof_squirrels_bycolors(df):
     fur_color_counts = df['Primary Fur Color'].value_counts()
-    plt.figure(figsize=(8, 4))
-    fur_color_counts.plot(kind='bar', color='skyblue')
+    plt.figure(figsize=(6, 3))
+    fur_color_counts.plot(kind='bar', color='red')
     # plt.title('Number of Squirrels Per Fur Color')
-    plt.title('TTESTTTT')
+    plt.title('umber of Squirrels Per Fur Color')
     plt.xlabel('Fur Color')
     plt.ylabel('Number of Squirrels')
     plt.xticks(rotation=45)  # Rotate x-axis labels for better readability
