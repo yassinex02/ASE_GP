@@ -15,6 +15,7 @@ def get_nof_squirrels_bycolors(df):
     plt.xticks(rotation=45)  # Rotate x-axis labels for better readability
     plt.tight_layout()
     html_plot = mpld3.fig_to_html(plt.gcf())
+    plt.show()
     with open('squirrel_plot.html', 'w') as file:
         file.write(html_plot)
 
