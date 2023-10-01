@@ -55,6 +55,3 @@ jobs:
         run: |
           echo "Tests failed. Exiting workflow."
           exit 1
-
-      - name: Open the GitHub Pages link
-        run: open https://yassinex02.github.io/ASE_GP/
