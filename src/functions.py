@@ -8,10 +8,10 @@ def get_nof_squirrels_bycolors(df):
     if df.empty:
         print("The provided dataframe is empty. No plot will be generated.")
         return
-    
+
     fur_color_counts = df['Primary Fur Color'].value_counts()
     plt.figure(figsize=(6, 3))
-    fur_color_counts.plot(kind='bar', color='blue')
+    fur_color_counts.plot(kind='bar', color='black')
     # plt.title('Number of Squirrels Per Fur Color')
     plt.title('Number of Squirrels Per Fur Color')
     plt.xlabel('Fur Color')
@@ -29,7 +29,6 @@ def plot_white_squirrels(df):
     if df.empty:
         print("The provided dataframe is empty. No plot will be generated.")
         return
-    
 
     white_squirrels = df[df["Highlights in Fur Color"] == "White"]
 
