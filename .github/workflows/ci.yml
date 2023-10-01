@@ -12,46 +12,49 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v2
-      
-    - name: Remove map.html and squirrel_plot.html if they exist
-      run: |
-        rm -f map.html
-        rm -f squirrel_plot.html
-        
-    - name: Set up Python
-      uses: actions/setup-python@v2
-      with:
-        python-version: '3.x'
-        
-    - name: Install dependencies
-      run: |
-        python -m pip install --upgrade pip
-        pip install -r requirements.txt        
+      - name: Checkout repository
+        uses: actions/checkout@v2
 
-    - name: List directory contents
-      run: ls -al
+      - name: Remove map.html and squirrel_plot.html if they exist
+        run: |
+          rm -f map.html
+          rm -f squirrel_plot.html
 
-    - name: Run build.py
-      run: python build.py
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: "3.x"
 
-    - name: List directory contents
-      run: ls -al
-    
-    - name: Check for the presence of map.html and squirrel_colors.png
-      run: |
-        if [[ ! -f "map.html" ]] || [[ ! -f "squirrel_plot.html" ]]; then
-          echo "Either map.html or squirrel_plot.html is missing."
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: List directory contents
+        run: ls -al
+
+      - name: Run build.py
+        run: python build.py
+
+      - name: List directory contents
+        run: ls -al
+
+      - name: Check for the presence of map.html and squirrel_colors.png
+        run: |
+          if [[ ! -f "map.html" ]] || [[ ! -f "squirrel_plot.html" ]]; then
+            echo "Either map.html or squirrel_plot.html is missing."
+            exit 1
+          fi
+
+      - name: Run tests
+        id: tests
+        run: python src/test.py
+
+      - name: Check test results
+        if: steps.tests.outcome == 'failure'
+        run: |
+          echo "Tests failed. Exiting workflow."
           exit 1
-        fi
 
-    - name: Run tests
-      id: tests
-      run: python src/test.py
-      
-    - name: Check test results
-      if: steps.tests.outcome == 'failure'
-      run: |
-        echo "Tests failed. Exiting workflow."
-        exit 1
+      - name: Open the GitHub Pages link
+        run: open https://yassinex02.github.io/ASE_GP/

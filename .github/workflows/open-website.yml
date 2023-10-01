@@ -1,0 +1,17 @@
+name: Open Website
+
+on:
+  workflow_run:
+    workflows: ["Python CI"]
+    types:
+      - completed
+
+jobs:
+  open-website:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Open the GitHub Pages link
+        run: open https://yassinex02.github.io/ASE_GP/
