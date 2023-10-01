@@ -4,18 +4,44 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Button Redirects</title>
-    <link rel="stylesheet" href="styles.css"> <!-- Add your CSS file here -->
+    <style>
+        /* Center-align the buttons */
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        button {
+            margin: 10px;
+        }
+    </style>
 </head>
 <body>
-    <header>
-        <h1>Click a Button to Redirect:</h1>
-    </header>
-    <main>
-        <button id="graph1Btn" class="btn">Graph 1</button>
-        <button id="graph2Btn" class="btn">Graph 2</button>
-        <button id="graph3Btn" class="btn">Graph 3</button>
-    </main>
+    <h1>Click a Button to Redirect:</h1>
+    <button onclick="redirectToGraph1()">Graph 1</button>
+    <button onclick="redirectToGraph2()">Graph 2</button>
+    <button onclick="redirectToGraph3()">Graph 3</button>
 
-    <script src="scripts.js"></script> <!-- Add your JavaScript file here -->
+    <script>
+        function redirectToGraph1() {
+            window.location.href = 'squirrel_plot.html';
+        }
+
+        function redirectToGraph2() {
+            window.location.href = 'graph2.html';
+        }
+
+        function redirectToGraph3() {
+            window.location.href = 'map.html';
+        }
+    </script>
 </body>
 </html>
