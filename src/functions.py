@@ -5,6 +5,10 @@ import mpld3
 
 
 def get_nof_squirrels_bycolors(df):
+    if df.empty:
+        print("The provided dataframe is empty. No plot will be generated.")
+        return
+    
     fur_color_counts = df['Primary Fur Color'].value_counts()
     plt.figure(figsize=(6, 3))
     fur_color_counts.plot(kind='bar', color='blue')
@@ -22,6 +26,10 @@ def get_nof_squirrels_bycolors(df):
 # Map of White Squirrels: Create a map that marks the locations of white squirrels spotted during the census.
 
 def plot_white_squirrels(df):
+    if df.empty:
+        print("The provided dataframe is empty. No plot will be generated.")
+        return
+    
 
     white_squirrels = df[df["Highlights in Fur Color"] == "White"]
 
