@@ -114,3 +114,7 @@ if __name__ == "__main__":
     test_empty_dataframe_plot_white_squirrels()
 
 # %%
+import mpld3 as mp
+
+print(mp.__version__)
+# %%
