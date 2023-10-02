@@ -1,5 +1,5 @@
 import pandas as pd
-from functions import get_nof_squirrels_bycolors, plot_white_squirrels
+from functions import get_nof_squirrels_bycolors, get_squirrels_by_area, plot_white_squirrels
 import matplotlib.pyplot as plt
 from unittest.mock import patch
 
@@ -27,6 +27,28 @@ def test_get_nof_squirrels_bycolors():
     assert result['Gray'] == 2, "Incorrect count for Gray color"
     assert result['Cinnamon'] == 2, "Incorrect count for Cinnamon color"
     assert result['Black'] == 1, "Incorrect count for Black color"
+
+def test_get_squirrels_by_area(df):
+    data = {
+        'Squirrel Area': ['Upper Manhattan', 'Central Manhattan', 'Lower Manhattan']
+    }
+    df = pd.DataFrame(data)
+
+    def modified_get_squirrels_by_area(df):
+        squirrels_by_area = df['Squirrel Area'].value_counts()
+        plt.figure(figsize=(9, 5))
+        squirrels_by_area.plot(kind='bar', color='red')
+        plt.title('Distribution of Squirrels Per Area')
+        plt.xlabel('Area')
+        plt.ylabel('Number of Squirrels')
+        plt.xticks(rotation=45)
+        plt.tight_layout()
+        plt.show()
+        return squirrels_by_area
+    result = modified_get_squirrels_by_area(df)
+    assert result['Upper Manhattan'] == 1, "Incorrect count for Upper Manhattan area"
+    assert result['Central Manhattan'] == 2, "Incorrect count for Central Manhattan area"
+    assert result['Lower Manhattan'] == 1, "Incorrect count for Lower Manhattan area"
 
 
 def test_plot_white_squirrels():
