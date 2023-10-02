@@ -11,7 +11,7 @@ def get_nof_squirrels_bycolors(df):
 
     fur_color_counts = df['Primary Fur Color'].value_counts()
     plt.figure(figsize=(6, 3))
-    fur_color_counts.plot(kind='bar', color='Red')
+    fur_color_counts.plot(kind='bar', color='yellowgreen')
     plt.title('Number of Squirrels Per Fur Color')
     plt.xlabel('Fur Color')
     plt.ylabel('Number of Squirrels')
