@@ -47,7 +47,21 @@ def test_empty_dataframe_get_nof_squirrels_bycolors():
     except Exception as e:
         assert False, f"Function raised an error with an empty dataframe: {e}"
 
-
+    def modified_get_squirrels_by_area(df):
+        squirrels_by_area = df['Squirrel Area'].value_counts()
+        plt.figure(figsize=(9, 5))
+        squirrels_by_area.plot(kind='bar', color='red')
+        plt.title('Distribution of Squirrels Per Area')
+        plt.xlabel('Area')
+        plt.ylabel('Number of Squirrels')
+        plt.xticks(rotation=45)
+        plt.tight_layout()
+        plt.show()
+        return squirrels_by_area
+    result = modified_get_squirrels_by_area(df)
+    assert result['Upper Manhattan'] == 1, "Incorrect count for Upper Manhattan area"
+    assert result['Central Manhattan'] == 2, "Incorrect count for Central Manhattan area"
+    assert result['Lower Manhattan'] == 1, "Incorrect count for Lower Manhattan area"
 
 def test_plot_white_squirrels():
     data = {
