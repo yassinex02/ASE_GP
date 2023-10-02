@@ -48,6 +48,8 @@ def get_squirrels_by_area(df):
     plt.figure(figsize=(5, 3))
     byarea_counts.plot(kind='bar', color='blue')
     plt.title('Distribution of Squirrels Per Area')
+    areas = plt.bar(df['Area Name'], byarea_counts, label='Areas')
+    plt.legend(handles=[areas], loc='upper right', frameon=False)
     plt.xlabel('Area')
     plt.ylabel('Number of Squirrels')
     plt.xticks(rotation=50)
