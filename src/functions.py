@@ -50,14 +50,14 @@ def plot_white_squirrels(df):
         print("The provided dataframe is empty. No plot will be generated.")
         return
 
-    white_squirrels = df[df["Highlights in Fur Color"] == "White"]
+    cinnamon_squirrels = df[df["Highlights in Fur Color"] == "Cinnamon"]
 
-    m = folium.Map(location=[white_squirrels["Squirrel Latitude (DD.DDDDDD)"].mean(),
-                             white_squirrels["Squirrel Longitude (-DD.DDDDDD)"].mean()],
+    m = folium.Map(location=[cinnamon_squirrels["Squirrel Latitude (DD.DDDDDD)"].mean(),
+                             cinnamon_squirrels["Squirrel Longitude (-DD.DDDDDD)"].mean()],
                    zoom_start=13)
 
     # Add markers for each white squirrel sighting
-    for index, row in white_squirrels.iterrows():
+    for index, row in cinnamon_squirrels.iterrows():
         folium.Marker([row["Squirrel Latitude (DD.DDDDDD)"], row["Squirrel Longitude (-DD.DDDDDD)"]],
                       tooltip=row["Park Name"]).add_to(m)
 
