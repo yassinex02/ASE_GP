@@ -12,8 +12,8 @@ def get_nof_squirrels_bycolors(df):
     fur_color_counts = df['Primary Fur Color'].value_counts()
 
     # Define a custom color palette for the categories
-    color_palette = ['yellowgreen', 'lightblue', 'salmon',
-                     'purple', 'gold']  # Add more colors as needed
+    color_palette = ['yellowgreen', 'lightblue',
+                     'salmon']  # Add more colors as needed
 
     plt.figure(figsize=(6, 3))
     fur_color_counts.plot(kind='bar', color=color_palette)
