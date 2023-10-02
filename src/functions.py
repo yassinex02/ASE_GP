@@ -10,8 +10,13 @@ def get_nof_squirrels_bycolors(df):
         return
 
     fur_color_counts = df['Primary Fur Color'].value_counts()
+
+    # Define a custom color palette for the categories
+    color_palette = ['yellowgreen', 'lightblue', 'salmon',
+                     'purple', 'gold']  # Add more colors as needed
+
     plt.figure(figsize=(6, 3))
-    fur_color_counts.plot(kind='bar', color='blue')
+    fur_color_counts.plot(kind='bar', color=color_palette)
     plt.title('Number of Squirrels Per Fur Color')
     plt.xlabel('Fur Color')
     plt.ylabel('Number of Squirrels')
@@ -20,10 +25,14 @@ def get_nof_squirrels_bycolors(df):
     # Set the x-axis tick labels to the actual category names
     plt.xticks(range(len(fur_color_counts)), fur_color_counts.index)
 
-    # Create a legend that matches numbers with their respective categories
-    handles = [plt.Rectangle((0, 0), 1, 1, color='blue',
-                             label=f"{index}: {value}") for index, value in fur_color_counts.items()]
-    plt.legend(handles=handles, title="Category: Count", loc="upper right")
+    # Create a legend mapping numeric values to category names with colors
+    legend_labels = {i: (category, color_palette[i]) for i, category in enumerate(
+        fur_color_counts.index)}
+    legend_elements = [plt.Line2D([0], [0], color=color_palette[i],
+                                  label=f"{legend_labels[i][0]} ({i})", lw=4) for i in range(len(legend_labels))]
+
+    # Add the legend to the plot
+    plt.legend(handles=legend_elements, title='Fur Color', loc='upper right')
 
     plt.tight_layout()
 
