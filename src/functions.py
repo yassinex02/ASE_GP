@@ -23,6 +23,7 @@ def get_nof_squirrels_bycolors(df):
 
 # Distribution of Squirrels Per Area: Create a graph that shows the number of squirrels in different areas of NYC.
 
+
 def get_squirrels_by_area(df):
     byarea_counts = df['Area Name'].value_counts()
     plt.figure(figsize=(5, 3))
