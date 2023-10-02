@@ -1,4 +1,5 @@
-#%%
+# %%
+import mpld3 as mp
 import pandas as pd
 from functions import get_nof_squirrels_bycolors, plot_white_squirrels
 import matplotlib.pyplot as plt
@@ -30,15 +31,18 @@ def test_get_nof_squirrels_bycolors():
     assert result['Cinnamon'] == 2, "Incorrect count for Cinnamon color"
     assert result['Black'] == 1, "Incorrect count for Black color"
 
+
 def test_squirrel_plot_html_creation():
     data = {
         'Primary Fur Color': ['Gray', 'Cinnamon', 'Black']
     }
     df = pd.DataFrame(data)
     get_nof_squirrels_bycolors(df)
-    assert os.path.exists('squirrel_plot.html'), "squirrel_plot.html was not created"
+    assert os.path.exists(
+        'squirrel_plot.html'), "squirrel_plot.html was not created"
     with open('squirrel_plot.html', 'r') as f:
         assert len(f.read()) > 0, "squirrel_plot.html is empty"
+
 
 def test_empty_dataframe_get_nof_squirrels_bycolors():
     df = pd.DataFrame()
@@ -47,21 +51,6 @@ def test_empty_dataframe_get_nof_squirrels_bycolors():
     except Exception as e:
         assert False, f"Function raised an error with an empty dataframe: {e}"
 
-    def modified_get_squirrels_by_area(df):
-        squirrels_by_area = df['Squirrel Area'].value_counts()
-        plt.figure(figsize=(9, 5))
-        squirrels_by_area.plot(kind='bar', color='red')
-        plt.title('Distribution of Squirrels Per Area')
-        plt.xlabel('Area')
-        plt.ylabel('Number of Squirrels')
-        plt.xticks(rotation=45)
-        plt.tight_layout()
-        plt.show()
-        return squirrels_by_area
-    result = modified_get_squirrels_by_area(df)
-    assert result['Upper Manhattan'] == 1, "Incorrect count for Upper Manhattan area"
-    assert result['Central Manhattan'] == 2, "Incorrect count for Central Manhattan area"
-    assert result['Lower Manhattan'] == 1, "Incorrect count for Lower Manhattan area"
 
 def test_plot_white_squirrels():
     data = {
@@ -80,6 +69,7 @@ def test_plot_white_squirrels():
     assert all(result["Highlights in Fur Color"] ==
                "White"), "Non-white squirrel found in filtered data"
 
+
 def test_map_html_creation():
     data = {
         'Highlights in Fur Color': ['White', 'Gray', 'White'],
@@ -90,7 +80,7 @@ def test_map_html_creation():
     df = pd.DataFrame(data)
     with patch('webbrowser.open'):
         plot_white_squirrels(df)
-    
+
     assert os.path.exists('map.html'), "map.html was not created"
     with open('map.html', 'r') as f:
         assert len(f.read()) > 0, "map.html is empty"
@@ -113,7 +103,7 @@ def test_no_white_squirrels_plot():
     }
     df = pd.DataFrame(data)
     plot_white_squirrels(df)
-    
+
     with open('map.html', 'r') as f:
         content = f.read()
         assert 'Marker' not in content, "Markers found in the map when there shouldn't be any"
@@ -128,7 +118,6 @@ if __name__ == "__main__":
     test_empty_dataframe_plot_white_squirrels()
 
 # %%
-import mpld3 as mp
 
 print(mp.__version__)
 # %%

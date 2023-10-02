@@ -1,6 +1,6 @@
 # %%
 import pandas as pd
-from src.functions import get_nof_squirrels_bycolors, plot_white_squirrels, get_squirrels_by_area
+from src.functions import get_nof_squirrels_bycolors, plot_white_squirrels
 
 
 def plot():
