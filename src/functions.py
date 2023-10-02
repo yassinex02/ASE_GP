@@ -30,7 +30,7 @@ def get_squirrels_by_area(df):
     plt.xticks(rotation=50)
     plt.tight_layout()
     html_area_plot = mpld3.fig_to_html(plt.gcf())
-    with open('squirrel_byarea_plot.html', 'w') as f:
+    with open('graph2.html', 'w') as f:
         f.write(html_area_plot)
 
 
