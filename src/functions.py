@@ -21,6 +21,21 @@ def get_nof_squirrels_bycolors(df):
     with open('squirrel_plot.html', 'w') as file:
         file.write(html_plot)
 
+# Distribution of Squirrels Per Area: Create a graph that shows the number of squirrels in different areas of NYC.
+
+def get_squirrels_by_area(df):
+    byarea_counts = df['Area Name'].value_counts()
+    plt.figure(figsize=(5, 3))
+    byarea_counts.plot(kind='bar', color='blue')
+    plt.title('Distribution of Squirrels Per Area')
+    plt.xlabel('Area')
+    plt.ylabel('Number of Squirrels')
+    plt.xticks(rotation=50)
+    plt.tight_layout()
+    html_area_plot = mpld3.fig_to_html(plt.gcf())
+    with open('graph2.html', 'w') as f:
+        f.write(html_area_plot)
+
 
 # Map of White Squirrels: Create a map that marks the locations of white squirrels spotted during the census.
 
