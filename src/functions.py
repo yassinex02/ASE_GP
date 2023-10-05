@@ -52,7 +52,7 @@ def plot_white_squirrels(df):
         return
 
     # Filter for white squirrels and exclude rows with NaN values in lat/long columns
-    white_squirrels = df[(df["Highlights in Fur Color"] == "Gray") & 
+    white_squirrels = df[(df["Highlights in Fur Color"] == "White") & 
                          (~np.isnan(df["Squirrel Latitude (DD.DDDDDD)"])) & 
                          (~np.isnan(df["Squirrel Longitude (-DD.DDDDDD)"]))]
 

@@ -14,3 +14,5 @@ if __name__ == "__main__":
     plot()
 
 # %%
+# unzip train_data.zip that is in /kaggle/working
+!unzip -q /kaggle/working/train_data.zip -d /kaggle/working
