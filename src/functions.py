@@ -2,6 +2,7 @@ import matplotlib.pyplot as plt
 import folium
 import webbrowser
 import mpld3
+import numpy as np
 
 
 def get_nof_squirrels_bycolors(df):
@@ -50,7 +51,14 @@ def plot_white_squirrels(df):
         print("The provided dataframe is empty. No plot will be generated.")
         return
 
-    white_squirrels = df[df["Highlights in Fur Color"] == "White"]
+    # Filter for white squirrels and exclude rows with NaN values in lat/long columns
+    white_squirrels = df[(df["Highlights in Fur Color"] == "White") & 
+                         (~np.isnan(df["Squirrel Latitude (DD.DDDDDD)"])) & 
+                         (~np.isnan(df["Squirrel Longitude (-DD.DDDDDD)"]))]
+
+    if white_squirrels.empty:
+        print("No valid white squirrel sightings in the dataframe. No plot will be generated.")
+        return
 
     m = folium.Map(location=[white_squirrels["Squirrel Latitude (DD.DDDDDD)"].mean(),
                              white_squirrels["Squirrel Longitude (-DD.DDDDDD)"].mean()],
