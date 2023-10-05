@@ -13,8 +13,8 @@ def get_nof_squirrels_bycolors(df):
     fur_color_counts = df['Primary Fur Color'].value_counts()
 
     # Define a custom color palette for the categories
-    color_palette = ['pink', 'orange',
-                     'black']  # Add more colors as needed
+    color_palette = ['black', 'orange',
+                     'yellow']  # Add more colors as needed
 
     plt.figure(figsize=(6, 3))
     fur_color_counts.plot(kind='bar', color=color_palette)
@@ -45,15 +45,16 @@ def get_nof_squirrels_bycolors(df):
 
 # Distribution of Squirrels Per Area: Create a graph that shows the number of squirrels in different areas of NYC.
 
+
 def get_squirrels_by_area(df):
     if df.empty:
         print("The provided dataframe is empty. No plot will be generated.")
         return
 
     byarea_counts = df['Area Name'].value_counts()
-    colour_palette = ['Purple','Green','Blue','Yellow']
+    colour_palette = ['Purple', 'Green', 'Blue', 'Yellow']
 
-    plt.figure(figsize=(8, 5))  # Increase figure size for better visualization
+    plt.figure(figsize=(6, 3))  # Increase figure size for better visualization
     byarea_counts.plot(kind='bar', color=colour_palette)
     plt.title('Distribution of Squirrels Per Area')
     plt.xlabel('Area')
@@ -67,7 +68,8 @@ def get_squirrels_by_area(df):
                                   label=f"{labels_legend[i][0]} ({i})", lw=4) for i in range(len(labels_legend))]
 
     # Place the legend outside the plot on the right
-    plt.legend(handles=elements_legend, title='Squirrels By Area', loc='center left', bbox_to_anchor=(1, 0.5))
+    plt.legend(handles=elements_legend, title='Squirrels By Area',
+               loc='center left', bbox_to_anchor=(1, 0.5))
 
     plt.tight_layout()
     html_area_plot = mpld3.fig_to_html(plt.gcf())
@@ -83,12 +85,13 @@ def plot_white_squirrels(df):
         return
 
     # Filter for white squirrels and exclude rows with NaN values in lat/long columns
-    white_squirrels = df[(df["Highlights in Fur Color"] == "White") & 
-                         (~np.isnan(df["Squirrel Latitude (DD.DDDDDD)"])) & 
+    white_squirrels = df[(df["Highlights in Fur Color"] == "White") &
+                         (~np.isnan(df["Squirrel Latitude (DD.DDDDDD)"])) &
                          (~np.isnan(df["Squirrel Longitude (-DD.DDDDDD)"]))]
 
     if white_squirrels.empty:
-        print("No valid white squirrel sightings in the dataframe. No plot will be generated.")
+        print(
+            "No valid white squirrel sightings in the dataframe. No plot will be generated.")
         return
 
     m = folium.Map(location=[white_squirrels["Squirrel Latitude (DD.DDDDDD)"].mean(),
