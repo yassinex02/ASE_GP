@@ -55,7 +55,7 @@ def get_squirrels_by_area(df):
     byarea_counts = df['Area Name'].value_counts()
     colour_palette = ['black', 'blue', 'green', 'Yellow']
 
-    plt.figure(figsize=(6, 3))  # Increase figure size for better visualization
+    plt.figure(figsize=(8, 4))  # Increase figure size for better visualization
     byarea_counts.plot(kind='bar', color=colour_palette)
     plt.title('Distribution of Squirrels Per Area')
     plt.xlabel('Area')
