@@ -43,6 +43,37 @@ def get_nof_squirrels_bycolors(df):
 
 # Distribution of Squirrels Per Area: Create a graph that shows the number of squirrels in different areas of NYC.
 
+# Distribution of Squirrels Per Area: Create a graph that shows the number of squirrels in different areas of NYC.
+
+def get_squirrels_by_area(df):
+    if df.empty:
+        print("The provided dataframe is empty. No plot will be generated.")
+        return
+
+    byarea_counts = df['Area Name'].value_counts()
+    colour_palette = ['Purple','Green','Blue','Yellow']
+
+    plt.figure(figsize=(8, 5))  # Increase figure size for better visualization
+    byarea_counts.plot(kind='bar', color=colour_palette)
+    plt.title('Distribution of Squirrels Per Area')
+    plt.xlabel('Area')
+    plt.ylabel('Number of Squirrels')
+    plt.xticks(rotation=50)
+    plt.xticks(range(len(byarea_counts)), byarea_counts.index)
+
+    labels_legend = {i: (category, colour_palette[i]) for i, category in enumerate(
+        byarea_counts.index)}
+    elements_legend = [plt.Line2D([0], [0], color=colour_palette[i],
+                                  label=f"{labels_legend[i][0]} ({i})", lw=4) for i in range(len(labels_legend))]
+
+    # Place the legend outside the plot on the right
+    plt.legend(handles=elements_legend, title='Squirrels By Area', loc='center left', bbox_to_anchor=(1, 0.5))
+
+    plt.tight_layout()
+    html_area_plot = mpld3.fig_to_html(plt.gcf())
+    with open('graph2.html', 'w') as f:
+        f.write(html_area_plot)
+
 
 # Map of White Squirrels: Create a map that marks the locations of white squirrels spotted during the census.
 
