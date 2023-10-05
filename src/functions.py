@@ -13,10 +13,10 @@ def get_nof_squirrels_bycolors(df):
     fur_color_counts = df['Primary Fur Color'].value_counts()
 
     # Define a custom color palette for the categories
-    color_palette = ['black', 'orange',
+    color_palette = ['green', 'red',
                      'yellow']  # Add more colors as needed
 
-    plt.figure(figsize=(6, 3))
+    plt.figure(figsize=(8, 4))
     fur_color_counts.plot(kind='bar', color=color_palette)
     plt.title('Number of Squirrels Per Fur Color')
     plt.xlabel('Fur Color')
@@ -41,6 +41,7 @@ def get_nof_squirrels_bycolors(df):
     with open('squirrel_plot.html', 'w') as file:
         file.write(html_plot)
 
+
 # Distribution of Squirrels Per Area: Create a graph that shows the number of squirrels in different areas of NYC.
 
 # Distribution of Squirrels Per Area: Create a graph that shows the number of squirrels in different areas of NYC.
@@ -52,7 +53,7 @@ def get_squirrels_by_area(df):
         return
 
     byarea_counts = df['Area Name'].value_counts()
-    colour_palette = ['Purple', 'Green', 'Blue', 'Yellow']
+    colour_palette = ['yellow', 'Green', 'Blue', 'Yellow']
 
     plt.figure(figsize=(6, 3))  # Increase figure size for better visualization
     byarea_counts.plot(kind='bar', color=colour_palette)
